@@ -1,0 +1,88 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-if.html">
+<link rel="import" href="../../bower_components/vaadin-icons/vaadin-icons.html">
+
+<dom-module id="encuesta-opcion">
+  <template>
+        
+    <style>
+      :host {
+        display: block;
+        border-bottom: 1px solid gray;
+      }
+      [hidden]{
+          display: none;
+      }
+      .marcada{
+          color:greenyellow;
+      }
+
+      .desmarcada{
+          color:grey;
+      }
+
+    </style>
+
+    <!-- <p hidden$="[[marcada]]">no se ve!!!</p> -->
+<!-- <template is="dom-if" if="[[marcada]]">
+            <p>Si esta marcada</p>
+    </template> -->
+        
+    <p on-click="toggle"
+        class$="[[clase]]"    
+    ><iron-icon icon="[[icono]]"></iron-icon>[[respuesta]]</p>
+
+
+    </template>
+  
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class EncuestaOpcion extends Polymer.Element {
+      static get is() { return 'encuesta-opcion'; }
+      static get properties() {
+        return {
+          respuesta: {
+            type: String
+          },
+          marcada:{
+              type:Boolean,
+              value:false
+          },
+          icono:{
+            type:String,
+            computed:'_calcularIcono(marcada)'
+          },
+          clase:{
+              type:String,
+              computed:'_calcularClase(marcada)'
+          }
+        };
+      }
+
+        _calcularIcono(marcada){
+            if(marcada){
+                return 'vaadin:check-square'
+            } else{
+                return 'vaadin:check-square-o'
+            }
+        }
+
+        _calcularClase(marcada){
+            if(marcada){
+                return 'marcada'
+            }else{
+                return 'desmarcada'
+            }
+        }
+
+        toggle(){
+            this.marcada = !this.marcada;
+        }
+    }
+
+    window.customElements.define(EncuestaOpcion.is, EncuestaOpcion);
+  </script>
+</dom-module>

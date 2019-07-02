@@ -1,0 +1,14 @@
+{
+  "name": "polymer-Escit",
+  "main": "index.html",
+  "dependencies": {
+    "polymer": "Polymer/polymer#^2.0.0",
+    "iron-icon": "PolymerElements/iron-icon#^3.0.1",
+    "iron-icons": "PolymerElements/iron-icons#^3.0.1",
+    "vaadin-icons": "vaadin/vaadin-icons#^4.3.1"
+  },
+  "devDependencies": {
+    "web-component-tester": "Polymer/web-component-tester#^6.0.0",
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0"
+  }
+}

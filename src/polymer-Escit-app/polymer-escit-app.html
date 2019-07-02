@@ -1,0 +1,36 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../encuesta/encuesta-opcion.html">
+<dom-module id="polymer-escit-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    
+    <encuesta-opcion 
+    respuesta="Esta opcion es la buena"
+  
+    ></encuesta-opcion>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class PolymerEscitApp extends Polymer.Element {
+      static get is() { return 'polymer-escit-app'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'polymer-escit-app'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(PolymerEscitApp.is, PolymerEscitApp);
+  </script>
+</dom-module>
