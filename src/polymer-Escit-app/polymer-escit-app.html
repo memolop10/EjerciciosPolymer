@@ -1,5 +1,7 @@
-<link rel="import" href="../../bower_components/polymer/polymer-element.html">
-<link rel="import" href="../encuesta/encuesta-opcion.html">
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../encuesta/encuesta-pregunta.html">
+
+
 <dom-module id="polymer-escit-app">
   <template>
     <style>
@@ -8,10 +10,13 @@
       }
     </style>
     
-    <encuesta-opcion 
-    respuesta="Esta opcion es la buena"
-  
-    ></encuesta-opcion>
+  <encuesta-pregunta
+  id="encuesta"
+  pregunta="Te gusta el uso de polymer 2 "
+  ></encuesta-pregunta>
+
+  <button on-click="quitarEncuesta">Quitar encuesta</button>
+
   </template>
 
   <script>
@@ -28,6 +33,10 @@
             value: 'polymer-escit-app'
           }
         };
+      }
+
+      quitarEncuesta(){
+        this.shadowRoot.removeChild(this.$.encuesta);
       }
     }
 

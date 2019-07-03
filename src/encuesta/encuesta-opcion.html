@@ -30,7 +30,7 @@
         
     <p on-click="toggle"
         class$="[[clase]]"    
-    ><iron-icon icon="[[icono]]"></iron-icon>[[respuesta]]</p>
+    ><iron-icon icon="[[icono]]"></iron-icon>[[num]].-[[respuesta]]</p>
 
 
     </template>
@@ -45,11 +45,12 @@
       static get properties() {
         return {
           respuesta: {
-            type: String
+            type: String,
           },
           marcada:{
               type:Boolean,
-              value:false
+              value:false,
+              reflectToAttribute:true
           },
           icono:{
             type:String,
@@ -58,7 +59,8 @@
           clase:{
               type:String,
               computed:'_calcularClase(marcada)'
-          }
+          },
+          num:Number
         };
       }
 

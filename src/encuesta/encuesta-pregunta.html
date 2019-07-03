@@ -1,0 +1,85 @@
+<link rel="import" href="../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/polymer/lib/elements/dom-repeat.html">
+<link rel="import" href="../encuesta/encuesta-opcion.html">
+
+<dom-module id="encuesta-pregunta">
+    <template>
+        <style>
+            :host {
+                display: block
+            }
+        </style>
+
+<div>
+    Tiempo Restante:[[segundos]]
+</div>
+
+        <p>[[pregunta]]</p>
+        <template is="dom-repeat" items="[[respuestas]]" as="respuesta">
+                <encuesta-opcion respuesta="[[respuesta]]" num="[[index]]"></encuesta-opcion>
+        </template>
+
+        <button on-click="resetTime">Reset Time</button>
+        
+    </template>
+
+    <script>
+        
+        class EncuestaPregunta extends Polymer.Element {
+            /**
+             * String providing the tag name to register the element under.
+             */
+            static get is() {
+                return 'encuesta-pregunta';
+            }
+
+            /**
+             * Object describing property-related metadata used by Polymer features
+             */
+            static get properties() {
+                return {
+                    pregunta:{
+                        type:String
+                    },
+                    respuestas:{
+                        type: Array,
+                        value: function(){
+                            return ["esto no puede ser", "claro que si","Tal vez ..."]
+                        }
+                    },
+                    segundos:{
+                        type:Number,
+                        value:60,
+                        readOnly:true
+                    }
+
+                };
+            }
+
+            resetTime(){
+                //this.segundos = 100 de esta forma no se podra manipular los segundos
+                //el readOnly crea su propio setter y es
+
+                this._setSegundos(60)
+            }
+
+            ready(){
+                super.ready();
+                this.cuentaAtras();
+                
+            }
+
+            cuentaAtras(){
+                this._setSegundos(this.segundos -1);
+                setTimeout(() => {
+                    console.log(this.segundos)
+                    this.cuentaAtras();
+                },1000);
+            }
+
+           
+        }
+
+        window.customElements.define(EncuestaPregunta.is, EncuestaPregunta);
+    </script>
+</dom-module>
