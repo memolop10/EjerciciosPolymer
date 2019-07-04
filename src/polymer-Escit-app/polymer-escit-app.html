@@ -13,6 +13,7 @@
   <encuesta-pregunta
   id="encuesta"
   pregunta="Te gusta el uso de polymer 2 "
+  on-marcada="marcadaOpcionAbuelo"
   ></encuesta-pregunta>
 
   <button on-click="quitarEncuesta">Quitar encuesta</button>
@@ -36,7 +37,12 @@
       }
 
       quitarEncuesta(){
-        this.shadowRoot.removeChild(this.$.encuesta);
+        // this.shadowRoot.removeChild(this.$.encuesta); 
+        this.$.encuesta.remove();
+      }
+
+      marcadaOpcionAbuelo(){
+        console.log('aKi')
       }
     }
 

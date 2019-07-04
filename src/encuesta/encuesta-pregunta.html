@@ -16,7 +16,11 @@
 
         <p>[[pregunta]]</p>
         <template is="dom-repeat" items="[[respuestas]]" as="respuesta">
-                <encuesta-opcion respuesta="[[respuesta]]" num="[[index]]"></encuesta-opcion>
+                <encuesta-opcion 
+                id="opcion[[index]]"
+                respuesta="[[respuesta]]" 
+                num="[[index]]"
+                on-marcada="marcadaOpcion"></encuesta-opcion>
         </template>
 
         <button on-click="resetTime">Reset Time</button>
@@ -69,6 +73,7 @@
                 super.ready();
                 this.cuentaAtras();
                 
+                window.addEventListener('mousemove',this.mostrarMovimiento);
             }
 
             cuentaAtras(){
@@ -82,7 +87,25 @@
             disconnectedCallback() {
 
                 super.disconnectedCallback();
-                clearTimeout(this.temporizador)
+                clearTimeout(this.temporizador);
+
+                window.removeEventListener('mousemove',this.mostrarMovimiento)
+            }
+
+            // mostrarMovimiento(e){
+            //     console.log(e.clientX , e.clientY)
+            // }
+
+            marcadaOpcion(e){
+                console.log('haz marcado una opcion',e)
+
+                for(let i = 0;i<this.respuestas.length;i++){
+                    if(e.detail.id != i){
+                        console.log('esta opcion no esta marcada', i)
+                        this.shadowRoot.querySelector('#opcion' + i).marcada = false;
+                    }
+                }
+
             }
            
         }
